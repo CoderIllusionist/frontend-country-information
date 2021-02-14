@@ -45,7 +45,8 @@ function stringBuilderCapital(x) {
     return `The capital is ${x}`
 }
 
-function spokenLanguages(languages) {
+
+function stringBuilderLanguages(languages) {
     let countries = 'They speak ';
     for (let i = 0; i < languages.length; i++) {
         if (i + 1 == languages.length && languages.length != 1) {
@@ -59,6 +60,23 @@ function spokenLanguages(languages) {
         }
     }
     return countries
+}
+
+function stringBuilderCurrencies(currencies) {
+    let currency = ' and you can pay with ';
+    for (let i = 0; i < currencies.length; i++) {
+        if (i + 1 == currencies.length && currencies.length != 1) {
+            currency = `${currency}` + "'s " + "and " + currencies[i].name + "'s" + ".";
+        } else if (i + 2 == currencies.length) {
+            currency = currency + currencies[i].name;
+        } else if (currencies.length == 1) {
+            currency = currency + currencies[i].name + "'s" + ".";
+        } else {
+            currency = currency + currencies[i].name + "'s" + ", ";
+        }
+    }
+    console.log(currencies.length)
+    return currency;
 }
 
 
@@ -78,10 +96,12 @@ function onSelectCountry() {
             getCountrybyName(opts[i].value).then(function (result) {
                 clearInput()
                 const values = returnValues(result);
+                const currencies = values[4]
                 const languages = values[5];
                 const situated = stringBuilderSituated(values[0], values[1], values[2]);
-                const capital = stringBuilderCapital(values[3]);
-                const speaks = spokenLanguages(languages)
+                const capital = stringBuilderCapital(values[3]) + stringBuilderCurrencies(currencies);
+
+                const speaks = stringBuilderLanguages(languages)
                 const flagURL = values[6]
                 flagController(flagURL,values[0]);
                 createElement("h2", values[0])
