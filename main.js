@@ -76,6 +76,7 @@ function onSelectCountry() {
     for (let i = 0; i < opts.length; i++) {
         if (opts[i].value === val) {
             getCountrybyName(opts[i].value).then(function (result) {
+                clearInput()
                 const values = returnValues(result);
                 const languages = values[5];
                 const situated = stringBuilderSituated(values[0], values[1], values[2]);
@@ -130,4 +131,9 @@ function removeElement(element) {
     for (index = element.length - 1; index >= 0; index--) {
         element[index].parentNode.removeChild(element[index]);
     }
+}
+
+function clearInput() {
+    setTimeout(() =>{document.getElementById('countries').value = '' }, 1000)
+
 }
