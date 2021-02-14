@@ -1,5 +1,3 @@
-
-
 async function getCountrybyName(country) {
     try {
         const response = await axios.get('https://restcountries.eu/rest/v2/name/' + country);
@@ -63,32 +61,47 @@ function spokenLanguages(languages) {
     return countries
 }
 
-// getCountrybyName('belgium').then(function (result) {
-//     const values = returnValues(result);
-//     const situated = stringBuilderSituated(values[0], values[1], values[2]);
-//     const capital = stringBuilderCapital(values[3]);
-//     const languages = values[5];
-//     const speaks = spokenLanguages(languages)
-//     console.log(speaks)
-// })
 
 getAllCountries().then(function (result) {
     const arrayCountryNames = addCountriesToArray(result)
-    var str=''; // variable to store the options
-    arrayCountryNames.forEach(element => str += '<option value="'+element+'" />');
-    var my_list=document.getElementById("country");
+    var str = ''; // variable to store the options
+    arrayCountryNames.forEach(element => str += '<option value="' + element + '" />');
+    var my_list = document.getElementById("country");
     my_list.innerHTML = str;
 })
 
 function onSelectCountry() {
     var val = document.getElementById("countries").value;
     var opts = document.getElementById('country').childNodes;
-    for (var i = 0; i < opts.length; i++) {
+    for (let i = 0; i < opts.length; i++) {
         if (opts[i].value === val) {
-            // An item was selected from the list!
-            // yourCallbackHere()
-            alert(opts[i].value);
+            getCountrybyName(opts[i].value).then(function (result) {
+                const values = returnValues(result);
+                const languages = values[5];
+                const situated = stringBuilderSituated(values[0], values[1], values[2]);
+                const capital = stringBuilderCapital(values[3]);
+                const speaks = spokenLanguages(languages)
+                const flagURL = values[6]
+                flagController(flagURL,values[0]);
+            })
             break;
         }
+
     }
+}
+
+let counter = 0
+function flagController(url, country) {
+if (counter == 1 || counter > 1) {
+    let oldFlag = document.getElementById('flag');
+    oldFlag.remove();
+}
+    counter++
+    var x = document.createElement("IMG");
+    x.setAttribute("src", url);
+    x.setAttribute("id", 'flag');
+    x.setAttribute("width", "304");
+    x.setAttribute("height", "228");
+    x.setAttribute("alt", "The Pulpit Rock");
+    document.body.appendChild(x);
 }
