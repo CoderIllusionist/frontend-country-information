@@ -83,6 +83,10 @@ function onSelectCountry() {
                 const speaks = spokenLanguages(languages)
                 const flagURL = values[6]
                 flagController(flagURL,values[0]);
+                createElement("h2", values[0])
+                createElement("h3", situated)
+                createElement("h4", capital)
+                createElement("h5", speaks)
             })
             break;
         }
@@ -92,16 +96,38 @@ function onSelectCountry() {
 
 let counter = 0
 function flagController(url, country) {
-if (counter == 1 || counter > 1) {
-    let oldFlag = document.getElementById('flag');
-    oldFlag.remove();
-}
+    if (counter == 1 || counter > 1) {
+        let oldFlag = document.getElementById('flag');
+        oldFlag.remove();
+    }
     counter++
     var x = document.createElement("IMG");
     x.setAttribute("src", url);
     x.setAttribute("id", 'flag');
     x.setAttribute("width", "304");
     x.setAttribute("height", "228");
-    x.setAttribute("alt", "The Pulpit Rock");
+    x.setAttribute("alt", `The flag of ${country}`);
     document.body.appendChild(x);
+}
+
+let elementCounter = 0;
+
+function createElement(element, text) {
+    console.log(elementCounter)
+    if (elementCounter == 1 || elementCounter > 1) {
+        removeElement(element);
+    }
+    elementCounter++
+    element = document.createElement(element);
+    text = document.createTextNode(text);
+    element.appendChild(text);
+    document.body.appendChild(element)
+}
+
+function removeElement(element) {
+    var element = document.getElementsByTagName(element), index;
+
+    for (index = element.length - 1; index >= 0; index--) {
+        element[index].parentNode.removeChild(element[index]);
+    }
 }
