@@ -75,7 +75,6 @@ function stringBuilderCurrencies(currencies) {
             currency = currency + currencies[i].name + "'s" + ", ";
         }
     }
-    console.log(currencies.length)
     return currency;
 }
 
@@ -134,7 +133,6 @@ function flagController(url, country) {
 let elementCounter = 0;
 
 function createElement(element, text) {
-    console.log(elementCounter)
     if (elementCounter == 1 || elementCounter > 1) {
         removeElement(element);
     }
