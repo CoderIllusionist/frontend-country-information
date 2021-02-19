@@ -8,9 +8,14 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<input type="text" id="countries" list="country" name="browser" oninput="onSelectCountry()">
-<datalist id="country">
-</datalist>
+<div class="container">
+    <h1 id="title" class="item">Let's search some country information</h1>
+    <img class="item" id="world-image" src="assets/rotating-world.gif" alt="A gif of the world!">
+    <input class="item" type="text" id="countries" list="country" name="browser" oninput="onSelectCountry()">
+    <datalist id="country">
+    </datalist>
+</div>
+
 </body>
 <script src="main.js"></script>
 </html>

@@ -1,5 +1,3 @@
-
-
 async function getCountrybyName(country) {
     try {
         const response = await axios.get('https://restcountries.eu/rest/v2/name/' + country);
@@ -47,7 +45,8 @@ function stringBuilderCapital(x) {
     return `The capital is ${x}`
 }
 
-function spokenLanguages(languages) {
+
+function stringBuilderLanguages(languages) {
     let countries = 'They speak ';
     for (let i = 0; i < languages.length; i++) {
         if (i + 1 == languages.length && languages.length != 1) {
@@ -63,32 +62,96 @@ function spokenLanguages(languages) {
     return countries
 }
 
-// getCountrybyName('belgium').then(function (result) {
-//     const values = returnValues(result);
-//     const situated = stringBuilderSituated(values[0], values[1], values[2]);
-//     const capital = stringBuilderCapital(values[3]);
-//     const languages = values[5];
-//     const speaks = spokenLanguages(languages)
-//     console.log(speaks)
-// })
+function stringBuilderCurrencies(currencies) {
+    let currency = ' and you can pay with ';
+    for (let i = 0; i < currencies.length; i++) {
+        if (i + 1 == currencies.length && currencies.length != 1) {
+            currency = `${currency}` + "'s " + "and " + currencies[i].name + "'s" + ".";
+        } else if (i + 2 == currencies.length) {
+            currency = currency + currencies[i].name;
+        } else if (currencies.length == 1) {
+            currency = currency + currencies[i].name + "'s" + ".";
+        } else {
+            currency = currency + currencies[i].name + "'s" + ", ";
+        }
+    }
+    return currency;
+}
+
 
 getAllCountries().then(function (result) {
     const arrayCountryNames = addCountriesToArray(result)
-    var str=''; // variable to store the options
-    arrayCountryNames.forEach(element => str += '<option value="'+element+'" />');
-    var my_list=document.getElementById("country");
+    var str = ''; // variable to store the options
+    arrayCountryNames.forEach(element => str += '<option value="' + element + '" />');
+    var my_list = document.getElementById("country");
     my_list.innerHTML = str;
 })
 
 function onSelectCountry() {
     var val = document.getElementById("countries").value;
     var opts = document.getElementById('country').childNodes;
-    for (var i = 0; i < opts.length; i++) {
+    for (let i = 0; i < opts.length; i++) {
         if (opts[i].value === val) {
-            // An item was selected from the list!
-            // yourCallbackHere()
-            alert(opts[i].value);
+            getCountrybyName(opts[i].value).then(function (result) {
+                clearInput()
+                const values = returnValues(result);
+                const currencies = values[4]
+                const languages = values[5];
+                const situated = stringBuilderSituated(values[0], values[1], values[2]);
+                const capital = stringBuilderCapital(values[3]) + stringBuilderCurrencies(currencies);
+
+                const speaks = stringBuilderLanguages(languages)
+                const flagURL = values[6]
+                flagController(flagURL,values[0]);
+                createElement("h2", values[0])
+                createElement("h3", situated)
+                createElement("h4", capital)
+                createElement("h5", speaks)
+            })
             break;
         }
+
     }
+}
+
+let counter = 0
+function flagController(url, country) {
+    if (counter == 1 || counter > 1) {
+        let oldFlag = document.getElementById('flag');
+        oldFlag.remove();
+    }
+    counter++
+    var x = document.createElement("IMG");
+    x.setAttribute("src", url);
+    x.setAttribute("id", 'flag');
+    x.setAttribute("width", "304");
+    x.setAttribute("height", "228");
+    x.setAttribute("alt", `The flag of ${country}`);
+    document.body.appendChild(x);
+}
+
+let elementCounter = 0;
+
+function createElement(element, text) {
+    if (elementCounter == 1 || elementCounter > 1) {
+        removeElement(element);
+    }
+    elementCounter++
+    element = document.createElement(element);
+    text = document.createTextNode(text);
+    element.appendChild(text);
+    document.body.appendChild(element)
+}
+
+function removeElement(element) {
+    var element = document.getElementsByTagName(element), index;
+
+    for (index = element.length - 1; index >= 0; index--) {
+        element[index].parentNode.removeChild(element[index]);
+    }
+}
+
+function clearInput() {
+    setTimeout(() =>{document.getElementById('countries').value = '' }, 1000)
+
 }
