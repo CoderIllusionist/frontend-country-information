@@ -1,27 +1,13 @@
 async function getCountrybyName(country) {
-    try {
-        const response = await axios.get('https://restcountries.eu/rest/v2/name/' + country);
-        return response;
-    } catch (error) {
-        console.error(error);
-    }
+    try { const response = await axios.get('https://restcountries.eu/rest/v2/name/' + country); return response; } catch (error) { console.error(error); }
 }
 
 async function getAllCountries(country) {
-    try {
-        const response = await axios.get('https://restcountries.eu/rest/v2/all');
-        return response;
-    } catch (error) {
-        console.error(error);
-    }
+    try { const response = await axios.get('https://restcountries.eu/rest/v2/all'); return response; } catch (error) { console.error(error); }
 }
 
 function addCountriesToArray(response) {
-    let array = [];
-    for (let i = 0; i < response.data.length; i++) {
-        array.push(response.data[i]['name'])
-    }
-    return array;
+    let array = []; for (let i = 0; i < response.data.length; i++) { array.push(response.data[i]['name']) } return array;
 };
 
 function returnValues(response) {
@@ -37,13 +23,9 @@ function returnValues(response) {
     return arrayInfo;
 };
 
-function stringBuilderSituated(x, y, z) {
-    return `${x} is situated in ${y}. It has a population of ${z} people.`
-}
+function stringBuilderSituated(x, y, z) { return `${x} is situated in ${y}. It has a population of ${z} people.` }
 
-function stringBuilderCapital(x) {
-    return `The capital is ${x}`
-}
+function stringBuilderCapital(x) { return `The capital is ${x}` }
 
 
 function stringBuilderLanguages(languages) {
@@ -116,10 +98,7 @@ function onSelectCountry() {
 
 let counter = 0
 function flagController(url, country) {
-    if (counter == 1 || counter > 1) {
-        let oldFlag = document.getElementById('flag');
-        oldFlag.remove();
-    }
+    if (counter == 1 || counter > 1) { let oldFlag = document.getElementById('flag'); oldFlag.remove(); }
     counter++
     var x = document.createElement("IMG");
     x.setAttribute("src", url);
@@ -133,9 +112,7 @@ function flagController(url, country) {
 let elementCounter = 0;
 
 function createElement(element, text) {
-    if (elementCounter == 1 || elementCounter > 1) {
-        removeElement(element);
-    }
+    if (elementCounter == 1 || elementCounter > 1) { removeElement(element); } // Remove element if it exists.
     elementCounter++
     element = document.createElement(element);
     text = document.createTextNode(text);
@@ -145,13 +122,9 @@ function createElement(element, text) {
 
 function removeElement(element) {
     var element = document.getElementsByTagName(element), index;
-
-    for (index = element.length - 1; index >= 0; index--) {
-        element[index].parentNode.removeChild(element[index]);
-    }
+    for (index = element.length - 1; index >= 0; index--) { element[index].parentNode.removeChild(element[index]); }
 }
 
 function clearInput() {
     setTimeout(() =>{document.getElementById('countries').value = '' }, 1000)
-
 }
