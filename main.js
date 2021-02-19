@@ -1,27 +1,13 @@
 async function getCountrybyName(country) {
-    try {
-        const response = await axios.get('https://restcountries.eu/rest/v2/name/' + country);
-        return response;
-    } catch (error) {
-        console.error(error);
-    }
+    try { const response = await axios.get('https://restcountries.eu/rest/v2/name/' + country); return response; } catch (error) { console.error(error); }
 }
 
 async function getAllCountries(country) {
-    try {
-        const response = await axios.get('https://restcountries.eu/rest/v2/all');
-        return response;
-    } catch (error) {
-        console.error(error);
-    }
+    try { const response = await axios.get('https://restcountries.eu/rest/v2/all'); return response; } catch (error) { console.error(error); }
 }
 
 function addCountriesToArray(response) {
-    let array = [];
-    for (let i = 0; i < response.data.length; i++) {
-        array.push(response.data[i]['name'])
-    }
-    return array;
+    let array = []; for (let i = 0; i < response.data.length; i++) { array.push(response.data[i]['name']) } return array;
 };
 
 function returnValues(response) {
@@ -37,13 +23,9 @@ function returnValues(response) {
     return arrayInfo;
 };
 
-function stringBuilderSituated(x, y, z) {
-    return `${x} is situated in ${y}. It has a population of ${z} people.`
-}
+function stringBuilderSituated(x, y, z) { return `${x} is situated in ${y}. It has a population of ${z} people.` };
 
-function stringBuilderCapital(x) {
-    return `The capital is ${x}`
-}
+function stringBuilderCapital(x) { return `The capital is ${x}` };
 
 
 function stringBuilderLanguages(languages) {
@@ -93,20 +75,20 @@ function onSelectCountry() {
     for (let i = 0; i < opts.length; i++) {
         if (opts[i].value === val) {
             getCountrybyName(opts[i].value).then(function (result) {
-                clearInput()
+                clearInput();
                 const values = returnValues(result);
                 const currencies = values[4]
                 const languages = values[5];
                 const situated = stringBuilderSituated(values[0], values[1], values[2]);
                 const capital = stringBuilderCapital(values[3]) + stringBuilderCurrencies(currencies);
 
-                const speaks = stringBuilderLanguages(languages)
-                const flagURL = values[6]
+                const speaks = stringBuilderLanguages(languages);
+                const flagURL = values[6];
                 flagController(flagURL,values[0]);
-                createElement("h2", values[0])
-                createElement("h3", situated)
-                createElement("h4", capital)
-                createElement("h5", speaks)
+                createElement("h2", values[0]);
+                createElement("h3", situated);
+                createElement("h4", capital);
+                createElement("h5", speaks);
             })
             break;
         }
@@ -116,11 +98,8 @@ function onSelectCountry() {
 
 let counter = 0
 function flagController(url, country) {
-    if (counter == 1 || counter > 1) {
-        let oldFlag = document.getElementById('flag');
-        oldFlag.remove();
-    }
-    counter++
+    if (counter == 1 || counter > 1) { let oldFlag = document.getElementById('flag'); oldFlag.remove(); }
+    counter++;
     var x = document.createElement("IMG");
     x.setAttribute("src", url);
     x.setAttribute("id", 'flag');
@@ -133,25 +112,17 @@ function flagController(url, country) {
 let elementCounter = 0;
 
 function createElement(element, text) {
-    if (elementCounter == 1 || elementCounter > 1) {
-        removeElement(element);
-    }
-    elementCounter++
+    if (elementCounter == 1 || elementCounter > 1) { removeElement(element); } // Remove element if it exists.
+    elementCounter++;
     element = document.createElement(element);
     text = document.createTextNode(text);
     element.appendChild(text);
-    document.body.appendChild(element)
+    document.body.appendChild(element);
 }
 
 function removeElement(element) {
     var element = document.getElementsByTagName(element), index;
-
-    for (index = element.length - 1; index >= 0; index--) {
-        element[index].parentNode.removeChild(element[index]);
-    }
+    for (index = element.length - 1; index >= 0; index--) { element[index].parentNode.removeChild(element[index]); }
 }
 
-function clearInput() {
-    setTimeout(() =>{document.getElementById('countries').value = '' }, 1000)
-
-}
+function clearInput() { setTimeout(() =>{document.getElementById('countries').value = '' }, 1000); }
