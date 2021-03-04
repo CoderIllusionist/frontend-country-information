@@ -84,6 +84,8 @@ function onSelectCountry() {
 
                 const speaks = stringBuilderLanguages(languages);
                 const flagURL = values[6];
+                const responseBox = document.querySelector('.response-box');
+                responseBox.style.visibility = 'visible';
                 flagController(flagURL,values[0]);
                 createElement("h2", values[0]);
                 createElement("h3", situated);
@@ -106,7 +108,8 @@ function flagController(url, country) {
     x.setAttribute("width", "304");
     x.setAttribute("height", "228");
     x.setAttribute("alt", `The flag of ${country}`);
-    document.body.appendChild(x);
+    const countryContainer = document.getElementById('country-flag-name')
+    countryContainer.append(x);
 }
 
 let elementCounter = 0;
@@ -114,6 +117,14 @@ let elementCounter = 0;
 function createElement(element, text) {
     if (elementCounter == 1 || elementCounter > 1) { removeElement(element); } // Remove element if it exists.
     elementCounter++;
+    if (element == 'h2') {
+        const countryContainer = document.getElementById('country-flag-name');
+        element = document.createElement(element);
+        text = document.createTextNode(text);
+        element.appendChild(text);
+        countryContainer.append(element);
+        return;
+    }
     element = document.createElement(element);
     text = document.createTextNode(text);
     element.appendChild(text);

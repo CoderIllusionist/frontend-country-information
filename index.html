@@ -8,14 +8,21 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="container">
-    <h1 id="title" class="item">Let's search some country information</h1>
-    <img class="item" id="world-image" src="assets/rotating-world.gif" alt="A gif of the world!">
-    <input class="item" type="text" id="countries" list="country" name="browser" oninput="onSelectCountry()">
-    <datalist id="country">
-    </datalist>
-</div>
+<div class="parent-container flex">
+    <div class="static-container flex">
+        <h1 id="title" class="item">Let's search some country information</h1>
+        <img class="spinning-world" src="assets/rotating-world.gif" alt="A gif of the world!">
+        <input class="item" type="text" id="countries" list="country" name="browser" oninput="onSelectCountry()">
+        <datalist id="country">
+        </datalist>
+    </div>
 
+
+    <div class="response-box">
+        <div class="title-container" id="country-flag-name"></div>
+    </div>
+</div>
 </body>
 <script src="main.js"></script>
+
 </html>
