@@ -3,7 +3,7 @@
     width: 100%;
     background: #f1f1f1;
     padding: 1em 2em;
-    margin: 2em;
+    margin-top: 2em;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
 }
@@ -33,6 +33,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 30px;
 }
 
 .spinning-world {
@@ -45,7 +46,10 @@ body {
 .title-container * {
     margin: 1em;
 }
-
+.info-container {
+    display: flex;
+    flex-direction: column;
+}
 #flag {
     width: 60px;
     height: 40px;
@@ -61,11 +65,11 @@ body {
 .topnav a {
     float: left;
     display: block;
-    color: #f2f2f2;
+    color: black;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-    font-size: 17px;
+    font-size: 13px;
 }
 
 /* Change the color of links on hover */

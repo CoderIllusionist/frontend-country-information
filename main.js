@@ -125,10 +125,12 @@ function createElement(element, text) {
         countryContainer.append(element);
         return;
     }
+    const countryInformationContainer = document.getElementById('country-information');
+
     element = document.createElement(element);
     text = document.createTextNode(text);
     element.appendChild(text);
-    document.body.appendChild(element);
+    countryInformationContainer.append(element);
 }
 
 function removeElement(element) {
