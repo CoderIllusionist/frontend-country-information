@@ -7,6 +7,27 @@ async function getAllCountries() {
     }
 }
 
+async function getCountrybyName(country) {
+    try {
+        const response = await axios.get('https://restcountries.eu/rest/v2/name/' + country);
+        return response;
+    } catch (error) {
+        console.error(error);
+    }
+}
+function returnValues(response) {
+    const countryName = response.data[0]['name'];
+    const subRegion = response.data[0]['subregion'];
+    const population = response.data[0]['population'];
+    const capital = response.data[0]['capital'];
+    const currencies = response.data[0]['currencies'];
+    const languages = response.data[0]['languages'];
+    const flag = response.data[0]['flag'];
+
+    const arrayInfo = [countryName, subRegion, population, capital, currencies, languages, flag];
+    return arrayInfo;
+}
+
 function addCountriesToArray(response) {
     let array = [];
     for (let i = 0; i < response.data.length; i++) {
@@ -29,12 +50,11 @@ function checkRegion(region, div) {
 
 getAllCountries().then(function (result) {
     const arrayCountryNames = addCountriesToArray(result);
-    console.log(arrayCountryNames)
     for (i = 0; i < arrayCountryNames.length; i++) {
         let div = document.createElement('div'); // create a <div> node
         let node = document.createElement("li");  // Create a <li> node
         let image = document.createElement('img') // create a <img> node
-        node.setAttribute("onclick","onCountryClick(this);");
+        node.setAttribute("onclick", "onCountryClick(this);");
         image.src = arrayCountryNames[i].flag; // set img src to the flag url
         let textnode = document.createTextNode(arrayCountryNames[i].name); // Create a text node
         div.appendChild(image);
@@ -49,5 +69,11 @@ getAllCountries().then(function (result) {
 })
 
 function onCountryClick(test) {
-    alert("You selected the country" + " " + test.textContent)
+    document.getElementById('loading-icon').style.display = "unset";
+    getCountrybyName(test.textContent).then(function (result) {
+        document.getElementById('loading-icon').style.display = "none";
+        const arrayCountryInformation = returnValues(result);
+        const country = arrayCountryInformation[0]
+        console.log(country)
+    })
 }

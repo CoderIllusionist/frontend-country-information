@@ -139,3 +139,5 @@ function removeElement(element) {
 }
 
 function clearInput() { setTimeout(() =>{document.getElementById('countries').value = '' }, 1000); }
+
+export {returnValues};

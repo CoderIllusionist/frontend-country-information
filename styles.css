@@ -117,6 +117,11 @@ body {
 
 /* country-list.html */
 
+.world-map {
+    width: 75%;
+    margin: auto;
+}
+
 li {
     margin: 0 0 3px 0;
 }
@@ -161,4 +166,15 @@ li {
     margin-top: auto;
     margin-left: 30px;
     margin-right: 15px;
+}
+.loading-icon {
+    display: none;
+    position: fixed; /* or absolute */
+    width: 10%;
+    height: 20%;
+    top: 40%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -100px;
+
 }

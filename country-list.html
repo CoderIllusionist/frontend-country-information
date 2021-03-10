@@ -9,31 +9,29 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<img id="loading-icon" class="loading-icon" src="./assets/loading.gif" alt="Loaing!">
 <div class="topnav" id="myTopnav">
     <a href="index.html">Home</a>
     <a href="country-list.html" class="active">Country List</a>
 </div>
 
+<div class="parent-container flex">
+    <div class="static-container flex">
+        <h1 id="title" class="item">Let's search some country information</h1>
+        <img class="world-map" src="assets/world_map.png" alt="A gif of the world!">
 
-<div class=”container-country-information”>
+    </div>
+</div>
+
+<div class="container-country-information">
     <ul class="listcountries" id="listcountries" title="List of countries">
         <! — list will go here ->
     </ul>
 
 
 </div>
-<div class="testlist-container">
-    <ul class="testlist">
-        <li class="leaf">I’m writing a long list item 1 so you can see what happens when the text wraps across multiple
-            lines
-        </li>
-        <li class="leaf">List item 2</li>
-        <div class="inlist">
-            <img src="./assets/rotating-world.gif" alt="">
-            <li class="leaf">List item 3</li>
-        </div>
-    </ul>
-</div>
 </body>
+
+
 <script src="country-info.js"></script>
 </html>
