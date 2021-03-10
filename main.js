@@ -2,7 +2,7 @@ async function getCountrybyName(country) {
     try { const response = await axios.get('https://restcountries.eu/rest/v2/name/' + country); return response; } catch (error) { console.error(error); }
 }
 
-async function getAllCountries(country) {
+async function getAllCountries() {
     try { const response = await axios.get('https://restcountries.eu/rest/v2/all'); return response; } catch (error) { console.error(error); }
 }
 
