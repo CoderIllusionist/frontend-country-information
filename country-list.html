@@ -2,35 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>World Map</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
+<img id="loading-icon" class="loading-icon" src="./assets/loading.gif" alt="Loaing!">
 <div class="topnav" id="myTopnav">
-    <a href="index.html" class="active">Home</a>
-    <a href="country-list.html">Country List</a>
+    <a href="index.html">Home</a>
+    <a href="country-list.html" class="active">Country List</a>
 </div>
 
 <div class="parent-container flex">
     <div class="static-container flex">
         <h1 id="title" class="item">Let's search some country information</h1>
-        <img class="spinning-world" src="assets/rotating-world.gif" alt="A gif of the world!">
-        <input class="item" type="text" id="countries" list="country" name="browser" oninput="onSelectCountry()">
-        <datalist id="country">
-        </datalist>
-    </div>
+        <img class="world-map" src="assets/world_map.png" alt="A gif of the world!">
 
-
-    <div class="response-box">
-        <div class="title-container" id="country-flag-name"></div>
-        <div class="info-container" id="country-information"></div>
     </div>
 </div>
-</body>
-<script src="main.js"></script>
 
+<div class="container-country-information">
+    <ul class="listcountries" id="listcountries" title="List of countries">
+        <! — list will go here ->
+    </ul>
+
+
+</div>
+</body>
+
+
+<script src="country-info.js"></script>
 </html>
